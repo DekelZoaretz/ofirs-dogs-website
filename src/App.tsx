@@ -1,14 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
-import resetCssStyles from './ResetCss';
+import styled, { ThemeProvider } from 'styled-components';
+import "the-new-css-reset/css/reset.css";
+import Header from './app/components/Header';
+import light from './app/themes/light';
 
-const AppContainer = styled.div`${resetCssStyles}`;
+const AppContainer = styled.div`
+  font-family: 'Amatic SC', cursive;
+`;
 
-function App() {
+const App = () => {
   return (
-    <AppContainer>
-      Ofir's Dogs Club
-    </AppContainer>
+    <ThemeProvider theme={light}>
+      <AppContainer>
+        <Header />  
+      </AppContainer>
+    </ThemeProvider>
+    
   );
 }
 
