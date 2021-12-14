@@ -1,6 +1,6 @@
 const he = {
     translation: {
-        main_title: "אתר הכלבים של אופיר"
+        main_title: "גינת הכלבים של אופיר"
     }
 }
 

@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 const HeaderContainer = styled.div`
     display: flex;
     justify-content: center;
+    background-color: #ffedf0;
 `;
 
 const MainTitle = styled.h1`
