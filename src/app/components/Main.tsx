@@ -43,7 +43,6 @@ interface MainProps {
 const Main: React.FC<MainProps> = (props) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [imagesList, setImagesList] = useState<string[]>([]);
-    console.log('test');
 
     useEffect(() => {
         (async () => {
