@@ -8,13 +8,14 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ffedf0;
+  margin-top: 60px;
 `;
 
 const ImagesWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 10px;
-  background-color: #ffedf0;
   padding: 20px;
 `;
 

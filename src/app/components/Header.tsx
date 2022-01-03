@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { useTranslation } from "react-i18next";
 
 const HeaderContainer = styled.div`
+    position: fixed;
+    top: 0;
+    width: 100%;
     display: flex;
     justify-content: center;
     background-color: #ffedf0;
