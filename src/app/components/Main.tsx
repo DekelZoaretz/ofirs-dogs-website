@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Loader from './Loader';
 import { ApiService } from '../services/apiService';
 
+const IMAGE_BOX_SIZE = '300px';
+
 const MainContainer = styled.div`
   flex: 1;
   display: flex;
@@ -14,15 +16,17 @@ const MainContainer = styled.div`
 
 const ImagesWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(${IMAGE_BOX_SIZE}, 1fr));
+  justify-items: center;
   gap: 10px;
   padding: 20px;
+  width: 100%;
 `;
 
 const ImageWrapper = styled.img`
   object-fit: contain;
-  height: 300px;
-  width: 300px;
+  height: ${IMAGE_BOX_SIZE};
+  width: ${IMAGE_BOX_SIZE};
   padding: 10px;
   border-radius: 10px;
   box-shadow: 2.1px 0 12.9px -4px rgb(0 0 0 / 3%), 7.1px 0px 43.3px -4px rgb(0 0 0 / 4%), 32px 0px 194px -4px rgb(0 0 0 / 7%);
