@@ -10,7 +10,7 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffedf0;
+  background-color: #ffa6b5;
   margin-top: 60px;
 `;
 
@@ -24,12 +24,12 @@ const ImagesWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.img`
-  object-fit: contain;
-  height: ${IMAGE_BOX_SIZE};
-  width: ${IMAGE_BOX_SIZE};
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 2.1px 0 12.9px -4px rgb(0 0 0 / 3%), 7.1px 0px 43.3px -4px rgb(0 0 0 / 4%), 32px 0px 194px -4px rgb(0 0 0 / 7%);
+    object-fit: cover;
+    border: 2px solid white;
+    width: ${IMAGE_BOX_SIZE};
+    aspect-ratio: 1;
+    border-radius: 50%;
+    box-shadow: 2.1px 0 12.9px -4px rgb(0 0 0 / 3%), 7.1px 0px 43.3px -4px rgb(0 0 0 / 4%), 32px 0px 194px -4px rgb(0 0 0 / 7%);
   
   &:hover {
     border: 1px solid #d7d7d7;

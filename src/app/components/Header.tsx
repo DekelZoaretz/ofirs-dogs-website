@@ -8,7 +8,7 @@ const HeaderContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: #ffedf0;
+    background-color: #ffb7c3;
 `;
 
 const MainTitle = styled.h1`
