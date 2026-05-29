@@ -1,5 +1,5 @@
-import { ApiServiceInterface } from '../generic/types/apiService';
-import { HttpClient } from './http-client.service';
+import { ApiServiceInterface } from '../../generic/types/apiService';
+import { HttpClient } from '../http-client/http-client.service';
 
 export const ApiService: ApiServiceInterface = {
   fetchBreedList: () => HttpClient.get('/breeds/list/all'),

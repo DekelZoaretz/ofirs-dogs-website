@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { HttpResponseType } from '../generic/types/http';
-import { eHttpStatusCode } from '../generic/constants/http.constants';
+import { HttpResponseType } from '../../generic/types/http';
+import { eHttpStatusCode } from '../../generic/constants/http.constants';
 import { BASE_URL } from './http-client.constants';
 
 const axiosInstance = axios.create({

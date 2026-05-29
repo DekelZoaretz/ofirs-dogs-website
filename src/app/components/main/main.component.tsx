@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchImagesThunk, loadMoreImages } from '../features/dogs/dogsSlice';
-import { Loader } from './loader.component';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchImagesThunk, loadMoreImages } from '../../features/dogs/dogsSlice';
+import { Loader } from '../loader/loader.component';
 import {
   MainContainer,
   ImagesWrapper,

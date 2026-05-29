@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../services/api/api.service';
 
 export interface DogOption {
   value: string;

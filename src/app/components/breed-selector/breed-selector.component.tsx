@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { setSelectedBreed } from '../features/dogs/dogsSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setSelectedBreed } from '../../features/dogs/dogsSlice';
 import { SelectorWrapper, StyledSelect } from './breed-selector.styled';
 
 export const BreedSelector: React.FC = () => {
