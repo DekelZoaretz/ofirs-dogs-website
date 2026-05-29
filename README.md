@@ -4,8 +4,9 @@ A modern, TypeScript-based React application for browsing dog images, powered by
 
 ## 🚀 Tech Stack
 
-- **Framework:** React 17 (TypeScript)
-- **State Management:** Redux Toolkit
+- **Framework:** React 18 (TypeScript)
+- **State Management:** Redux Toolkit 1.9
+- **Build Tool:** React Scripts 5
 - **Styling:** Styled-components
 - **API Client:** Axios (Custom HttpClient)
 - **Localization:** i18next (supports Hebrew)
@@ -18,11 +19,12 @@ A modern, TypeScript-based React application for browsing dog images, powered by
 
 ## 🏗️ Architecture
 
-The project uses a modular service-oriented structure:
+The project uses a modular service-oriented structure with dedicated folders for each component:
 
-- `src/app/services`: Centralized API logic via `HttpClient` and `ApiService`.
-- `src/app/components`: Reusable UI components.
-- `src/app/store.ts`: Centralized state management using Redux Toolkit.
+- **Components:** `src/app/components/[name]/` - Each component has its own folder with `.component.tsx`, `.styled.tsx`, and `.constants.ts` files
+- **Services:** `src/app/services/[name]/` - API services grouped by function (api, http-client)
+- **State:** `src/app/features/dogs/` - Redux slices for feature state management
+- **Theme & Types:** `src/app/generic/` - Shared types, constants, and theme configuration
 
 ## 🛠️ Getting Started
 

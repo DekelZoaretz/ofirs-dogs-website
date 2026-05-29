@@ -6,11 +6,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm start              # Development server at http://localhost:3000
-npm run build          # Production build (use NODE_OPTIONS=--openssl-legacy-provider if on Node 18+)
+npm run build          # Production build
 npm test               # Run tests in watch mode
 ```
 
-Note: Older react-scripts version requires `NODE_OPTIONS=--openssl-legacy-provider` with Node 18+.
+## Tech Stack
+
+- **React 18** with TypeScript
+- **Redux Toolkit 1.9** for state management
+- **React Scripts 5** (Create React App with React 18 support)
+- **Styled-components** for styling
+- **Axios** with custom HttpClient
+- **i18next** for internationalization (Hebrew/RTL)
 
 ## Code Organization
 
