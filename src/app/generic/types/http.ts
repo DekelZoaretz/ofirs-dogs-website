@@ -1,6 +1,6 @@
-import { eHttpStatusCode } from '../enums/http';
+import { eHttpStatusCode } from "../enums/http";
 
 export interface HttpResponseType<T> {
-    data: T;
-    errorCode?: keyof typeof eHttpStatusCode;
+  data: T;
+  errorCode?: keyof typeof eHttpStatusCode;
 }

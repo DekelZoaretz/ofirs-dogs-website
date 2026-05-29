@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const MainLoader = styled.div<{ size: number }>`
   display: inline-block;
@@ -38,17 +38,17 @@ const MainLoader = styled.div<{ size: number }>`
 `;
 
 interface LoaderProps {
-    size?: number;
-    className?: string;
+  size?: number;
+  className?: string;
 }
 
-const Loader: React.FC<LoaderProps> = ({ size = 80, className = '' }) => {
-    return (
-        <MainLoader size={size} className={className}>
-            <div />
-            <div />
-        </MainLoader>
-    );
+const Loader: React.FC<LoaderProps> = ({ size = 80, className = "" }) => {
+  return (
+    <MainLoader size={size} className={className}>
+      <div />
+      <div />
+    </MainLoader>
+  );
 };
 
 export default Loader;
