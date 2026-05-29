@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../../hooks';
-import { fetchBreedsThunk } from '../../features/dogs/dogsSlice';
+import { fetchBreedsThunk } from '../../features/dogs/dogs.slice';
 import { BreedSelector } from '../breed-selector/breed-selector.component';
 import { HeaderContainer, MainTitle } from './header.styled';
 

@@ -1,4 +1,4 @@
-import { ApiServiceInterface } from '../../generic/types/apiService';
+import { ApiServiceInterface } from '../../generic/types/api-service.type';
 import { HttpClient } from '../http-client/http-client.service';
 
 export const ApiService: ApiServiceInterface = {
