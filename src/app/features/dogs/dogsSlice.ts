@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ApiService } from "../../services/apiService";
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { ApiService } from '../../services/api.service';
 
 export interface DogOption {
   value: string;
@@ -11,16 +11,16 @@ interface DogsState {
   selectedBreed: string;
   allImages: string[];
   visibleImages: string[];
-  status: "idle" | "loading" | "succeeded" | "failed";
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
 const initialState: DogsState = {
   breeds: [],
-  selectedBreed: "all",
+  selectedBreed: 'all',
   allImages: [],
   visibleImages: [],
-  status: "idle",
+  status: 'idle',
   error: null,
 };
 
@@ -30,11 +30,11 @@ export const fetchBreedsThunk = createAsyncThunk<
   DogOption[],
   void,
   { rejectValue: string }
->("dogs/fetchBreeds", async (_, { rejectWithValue }) => {
+>('dogs/fetchBreeds', async (_, { rejectWithValue }) => {
   try {
-    console.log("Fetching breed list started...");
+    console.log('Fetching breed list started...');
     const response = await ApiService.fetchBreedList();
-    console.log("Breed list response received:", response);
+    console.log('Breed list response received:', response);
     const breedRecord = response.data.message;
     const options: DogOption[] = [];
     const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -63,11 +63,11 @@ export const fetchBreedsThunk = createAsyncThunk<
 
     // Sort alphabetically by label
     options.sort((a, b) => a.label.localeCompare(b.label));
-    console.log("Processed breed options count:", options.length);
+    console.log('Processed breed options count:', options.length);
     return options;
   } catch (error: any) {
-    console.error("fetchBreedsThunk error:", error);
-    return rejectWithValue(error.message || "Failed to load breeds");
+    console.error('fetchBreedsThunk error:', error);
+    return rejectWithValue(error.message || 'Failed to load breeds');
   }
 });
 
@@ -75,10 +75,10 @@ export const fetchImagesThunk = createAsyncThunk<
   string[],
   string,
   { rejectValue: string }
->("dogs/fetchImages", async (breed, { rejectWithValue }) => {
+>('dogs/fetchImages', async (breed, { rejectWithValue }) => {
   try {
     console.log(`Fetching images for breed: ${breed}`);
-    if (breed === "all") {
+    if (breed === 'all') {
       const response = await ApiService.fetchRandomImages(100);
       return response.data.message;
     } else {
@@ -87,12 +87,12 @@ export const fetchImagesThunk = createAsyncThunk<
     }
   } catch (error: any) {
     console.error(`fetchImagesThunk error for breed ${breed}:`, error);
-    return rejectWithValue(error.message || "Failed to load images");
+    return rejectWithValue(error.message || 'Failed to load images');
   }
 });
 
 const dogsSlice = createSlice({
-  name: "dogs",
+  name: 'dogs',
   initialState,
   reducers: {
     setSelectedBreed(state, action: PayloadAction<string>) {
@@ -114,35 +114,35 @@ const dogsSlice = createSlice({
       // fetchBreeds
       .addCase(fetchBreedsThunk.fulfilled, (state, action) => {
         console.log(
-          "fetchBreedsThunk.fulfilled dispatched with",
+          'fetchBreedsThunk.fulfilled dispatched with',
           action.payload.length,
-          "breeds",
+          'breeds',
         );
         state.breeds = action.payload;
       })
       .addCase(fetchBreedsThunk.rejected, (state, action) => {
         console.error(
-          "fetchBreedsThunk.rejected dispatched with error:",
+          'fetchBreedsThunk.rejected dispatched with error:',
           action.payload,
         );
       })
       // fetchImages
       .addCase(fetchImagesThunk.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
         state.error = null;
       })
       .addCase(fetchImagesThunk.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.allImages = action.payload;
         // Render initial chunk
         state.visibleImages = action.payload.slice(0, IMAGES_PER_PAGE);
       })
       .addCase(fetchImagesThunk.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload || "Failed to load images";
+        state.status = 'failed';
+        state.error = action.payload || 'Failed to load images';
       });
   },
 });
 
 export const { setSelectedBreed, loadMoreImages } = dogsSlice.actions;
-export default dogsSlice.reducer;
+export const dogsReducer = dogsSlice.reducer;

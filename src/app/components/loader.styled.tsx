@@ -1,7 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const MainLoader = styled.div<{ size: number }>`
+export const MainLoader = styled.div<{ size: number }>`
   display: inline-block;
   position: relative;
   width: ${(p) => `${p.size}px`};
@@ -36,19 +35,3 @@ const MainLoader = styled.div<{ size: number }>`
     }
   }
 `;
-
-interface LoaderProps {
-  size?: number;
-  className?: string;
-}
-
-const Loader: React.FC<LoaderProps> = ({ size = 80, className = "" }) => {
-  return (
-    <MainLoader size={size} className={className}>
-      <div />
-      <div />
-    </MainLoader>
-  );
-};
-
-export default Loader;

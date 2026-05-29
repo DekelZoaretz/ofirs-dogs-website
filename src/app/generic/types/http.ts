@@ -1,4 +1,4 @@
-import { eHttpStatusCode } from "../enums/http";
+import { eHttpStatusCode } from '../constants/http.constants';
 
 export interface HttpResponseType<T> {
   data: T;

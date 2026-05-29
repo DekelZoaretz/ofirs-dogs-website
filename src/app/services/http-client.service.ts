@@ -1,8 +1,7 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { HttpResponseType } from "../generic/types/http";
-import { eHttpStatusCode } from "../generic/enums/http";
-
-const BASE_URL = "https://dog.ceo/api";
+import axios, { AxiosRequestConfig } from 'axios';
+import { HttpResponseType } from '../generic/types/http';
+import { eHttpStatusCode } from '../generic/constants/http.constants';
+import { BASE_URL } from './http-client.constants';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -37,7 +36,7 @@ const handleResponse = async (
   }
 };
 
-const HttpClient = {
+export const HttpClient = {
   get<T = any, R = T>(url: string, config?: AxiosRequestConfig): Promise<R> {
     return handleResponse(axiosInstance.get<T, R>(url, getFullConfig(config)));
   },
@@ -74,5 +73,3 @@ const HttpClient = {
     );
   },
 };
-
-export default HttpClient;
