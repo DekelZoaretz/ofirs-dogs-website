@@ -1,6 +1,6 @@
-# Ofir's Dogs Website 🐕
+# Ofir's Pets Website 🐕🐈
 
-A modern, TypeScript-based React application for browsing dog images, powered by the [Dog CEO API](https://dog.ceo/dog-api/).
+A modern, TypeScript-based React application for browsing dog and cat images, powered by the [Dog CEO API](https://dog.ceo/dog-api/) and [The Cat API](https://thecatapi.com/).
 
 ## 🚀 Tech Stack
 
@@ -8,23 +8,25 @@ A modern, TypeScript-based React application for browsing dog images, powered by
 - **State Management:** Redux Toolkit 1.9
 - **Build Tool:** React Scripts 5
 - **Styling:** Styled-components
-- **API Client:** Axios (Custom HttpClient)
-- **Localization:** i18next (supports Hebrew)
+- **API Client:** Axios (Custom HttpClient & Axios Instances)
+- **Localization:** i18next (supports Hebrew with RTL layout)
 
 ## ✨ Features
 
-- **Breed Exploration:** Fetch and display images from various dog breeds.
-- **Responsive Grid:** A fluid image layout designed with Styled-components.
-- **Multilingual Support:** RTL support with Hebrew localization.
+- **Pill Tab Navigator:** Seamlessly switch between dogs and cats views with smooth transitions.
+- **Breed Exploration:** Fetch and filter images by specific dog and cat breeds.
+- **Infinite Scroll:** Independent client-side pagination that loads additional images dynamically as you scroll.
+- **Interactive Lightbox:** Click on any photo to open a high-resolution modal view. Supports close actions via Escape key, close button, or backdrop click.
+- **Multilingual Support:** Full RTL support with Hebrew localization.
 
 ## 🏗️ Architecture
 
-The project uses a modular service-oriented structure with dedicated folders for each component:
+The project uses a modular structure with dedicated folders for components, services, and features:
 
-- **Components:** `src/app/components/[name]/` - Each component has its own folder with `.component.tsx`, `.styled.tsx`, and `.constants.ts` files
-- **Services:** `src/app/services/[name]/` - API services grouped by function (api, http-client)
-- **State:** `src/app/features/dogs/` - Redux slices for feature state management
-- **Theme & Types:** `src/app/generic/` - Shared types, constants, and theme configuration
+- **Components:** `src/app/components/[name]/` - Self-contained components containing `.component.tsx`, `.styled.tsx`, and `.constants.ts`.
+- **Services:** `src/app/services/[name]/` - Isolated API handlers (e.g. `api.service.ts` for dogs, `cat-api.service.ts` for cats) built on top of customized client wrappers.
+- **State:** `src/app/features/` - Redux slices managing isolated features (`dogs/`, `cats/`, and `ui/` tabs configuration).
+- **Theme & Types:** `src/app/generic/` and `src/app/themes/` - Shared types, HTTP constants, and theme configs.
 
 ## 🛠️ Getting Started
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchImagesThunk, loadMoreImages } from '../../features/dogs/dogs.slice';
+import { fetchCatImagesThunk, loadMoreCatImages } from '../../features/cats/cats.slice';
 import { Loader } from '../loader/loader.component';
 import {
   MainContainer,
@@ -18,15 +19,23 @@ import { SCROLL_THRESHOLD } from './main.constants';
 export const Main: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { selectedBreed, visibleImages, status } = useAppSelector(
-    (state) => state.dogs,
-  );
+  const activeTab = useAppSelector((state) => state.ui.activeTab);
+  
+  const dogState = useAppSelector((state) => state.dogs);
+  const catState = useAppSelector((state) => state.cats);
+
+  const { visibleImages, status } =
+    activeTab === 'dogs' ? dogState : catState;
 
   const [activeModalImage, setActiveModalImage] = useState<string | null>(null);
 
   useEffect(() => {
-    dispatch(fetchImagesThunk(selectedBreed));
-  }, [selectedBreed, dispatch]);
+    if (activeTab === 'dogs') {
+      dispatch(fetchImagesThunk(dogState.selectedBreed));
+    } else {
+      dispatch(fetchCatImagesThunk(catState.selectedBreed));
+    }
+  }, [activeTab, dogState.selectedBreed, catState.selectedBreed, dispatch]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,13 +44,17 @@ export const Main: React.FC = () => {
       const clientHeight = window.innerHeight;
 
       if (clientHeight + scrollTop >= scrollHeight - SCROLL_THRESHOLD) {
-        dispatch(loadMoreImages());
+        if (activeTab === 'dogs') {
+          dispatch(loadMoreImages());
+        } else {
+          dispatch(loadMoreCatImages());
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [dispatch]);
+  }, [dispatch, activeTab]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -76,7 +89,11 @@ export const Main: React.FC = () => {
     <MainContainer>
       {status === 'loading' && <Loader size={250} />}
 
-      {status === 'failed' && <MessageText>{t('error_loading')}</MessageText>}
+      {status === 'failed' && (
+        <MessageText>
+          {activeTab === 'dogs' ? t('error_loading_dogs') : t('error_loading_cats')}
+        </MessageText>
+      )}
 
       {status === 'succeeded' && (
         <ImagesWrapper>
@@ -84,7 +101,7 @@ export const Main: React.FC = () => {
             <ImageWrapper
               key={srcUrl}
               src={srcUrl}
-              alt="Cute doggy"
+              alt={activeTab === 'dogs' ? 'Cute doggy' : 'Cute kitty'}
               loading="lazy"
               onClick={() => handleImageClick(srcUrl)}
             />
@@ -96,7 +113,10 @@ export const Main: React.FC = () => {
         <ModalBackdrop onClick={handleBackdropClick}>
           <ModalContent onClick={handleModalContentClick}>
             <CloseButton onClick={handleCloseClick}>✕</CloseButton>
-            <ModalImage src={activeModalImage} alt="Doggy zoomed" />
+            <ModalImage
+              src={activeModalImage}
+              alt={activeTab === 'dogs' ? 'Doggy zoomed' : 'Kitty zoomed'}
+            />
           </ModalContent>
         </ModalBackdrop>
       )}

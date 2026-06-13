@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSelectedBreed } from '../../features/dogs/dogs.slice';
+import { setSelectedCatBreed } from '../../features/cats/cats.slice';
 import {
   SelectorWrapper,
   SearchInput,
@@ -15,13 +16,24 @@ import {
 export const BreedSelector: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { breeds, selectedBreed } = useAppSelector((state) => state.dogs);
+  const activeTab = useAppSelector((state) => state.ui.activeTab);
+  
+  const { breeds: dogBreeds, selectedBreed: selectedDogBreed } = useAppSelector(
+    (state) => state.dogs,
+  );
+  const { breeds: catBreeds, selectedBreed: selectedCatBreed } = useAppSelector(
+    (state) => state.cats,
+  );
+
+  const breeds = activeTab === 'dogs' ? dogBreeds : catBreeds;
+  const selectedBreed = activeTab === 'dogs' ? selectedDogBreed : selectedCatBreed;
+
   const [isOpen, setIsOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const allOptions = [
-    { value: 'all', label: t('all_breeds') },
+    { value: 'all', label: activeTab === 'dogs' ? t('all_breeds_dogs') : t('all_breeds_cats') },
     ...breeds.map((breed) => ({
       value: breed.value,
       label: t(breed.value, breed.label),
@@ -36,7 +48,11 @@ export const BreedSelector: React.FC = () => {
     allOptions.find((option) => option.value === selectedBreed)?.label || '';
 
   const handleSelect = (value: string) => {
-    dispatch(setSelectedBreed(value));
+    if (activeTab === 'dogs') {
+      dispatch(setSelectedBreed(value));
+    } else {
+      dispatch(setSelectedCatBreed(value));
+    }
     setIsOpen(false);
     setSearchInput('');
   };
@@ -71,7 +87,7 @@ export const BreedSelector: React.FC = () => {
           <>
             <SearchInput
               type="text"
-              placeholder={t('search_breeds') || 'Search breeds...'}
+              placeholder={activeTab === 'dogs' ? t('select_breed_dogs') : t('select_breed_cats')}
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               autoFocus
